@@ -40,12 +40,13 @@ void Reader()
 			unsigned __int64 currentController = Read<unsigned __int64>(listEntry + (120) * (i & 0x1FF));
 			if (!currentController)
 				continue;
-			unsigned __int64 pawnHandle = Read<unsigned __int64>(currentController + m_hPlayerPawn);
-			if (!pawnHandle)
-				continue;
-			
+
 			bool isme = Read<bool>(currentController + m_bIsLocalPlayerController);
 			if (isme)
+				continue;
+
+			unsigned __int64 pawnHandle = Read<unsigned __int64>(currentController + m_hPlayerPawn);
+			if (!pawnHandle)
 				continue;
 
 			std::string name = Read<std::string>(currentController + m_iszPlayerName);
