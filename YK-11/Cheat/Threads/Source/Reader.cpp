@@ -40,15 +40,15 @@ void Reader()
 			unsigned __int64 currentController = Read<unsigned __int64>(listEntry + (120) * (i & 0x1FF));
 			if (!currentController)
 				continue;
-			unsigned __int64 pawnHandle = Read<unsigned __int64>(currentController + 0x8FC); 
+			unsigned __int64 pawnHandle = Read<unsigned __int64>(currentController + m_hPlayerPawn);
 			if (!pawnHandle)
 				continue;
 			
-			bool isme = Read<bool>(currentController + 0x778);
+			bool isme = Read<bool>(currentController + m_bIsLocalPlayerController);
 			if (isme)
 				continue;
 
-			std::string name = Read<std::string>(currentController + 0x6E8);
+			std::string name = Read<std::string>(currentController + m_iszPlayerName);
 
 			unsigned __int64 listEntry2 = Read<unsigned __int64>(entityList + (0x8 * ((pawnHandle & 0x7FFF) >> 9) + 16));
 			if (!listEntry2)
@@ -57,7 +57,7 @@ void Reader()
 			if (!currentPawn)
 				continue;
 
-			Vector3 camerapos = Read<Vector3>(currentPawn + 0x3DD4);
+			Vector3 camerapos = Read<Vector3>(currentPawn + m_vecLastClipCameraPos);
 
 			BaseEntity be = Read<BaseEntity>(currentPawn);
 			array2[count] = be;
@@ -70,9 +70,9 @@ void Reader()
 
 			cache[count] = {
 				vm,
-				bp.Position,
+				bp.m_vOldOrigin,
 				camerapos,
-				be.health,
+				be.m_iHealth,
 				be.m_iTeamNum,
 				name
 			};
