@@ -85,8 +85,8 @@ void Reader()
 
 void RenderOverlayThread() 
 {
-	Vector2 cam[10] = {};
-	Vector2 cam_pos[10] = {};
+	Vector2 cam = {};
+	Vector2 cam_pos = {};
 	overlay.CreateOverlay();
 	overlay.CreateDevice();
 	overlay.CreateImGui();
@@ -102,13 +102,13 @@ void RenderOverlayThread()
 		{
 			for (int i = 0; i < _countof(cache); i++)
 			{
-				if (W2S(cache[i].Position, cam[i], cache[i].vm))
+				if (W2S(cache[i].Position, cam, cache[i].vm))
 				{
 					if (!cache[i].health)
 						continue;
-					W2S(cache[i].CameraPos, cam_pos[i], cache[i].vm);
-					ImVec2 top = ImVec2(cam_pos[i].x, cam_pos[i].y);
-					ImVec2 bottom = ImVec2(cam[i].x, cam[i].y);
+					W2S(cache[i].CameraPos, cam_pos, cache[i].vm);
+					ImVec2 top = ImVec2(cam_pos.x, cam_pos.y);
+					ImVec2 bottom = ImVec2(cam.x, cam.y);
 
 					float height = bottom.y - top.y;
 					float width = height / 2.0f; // typical ESP ratio
@@ -128,12 +128,12 @@ void RenderOverlayThread()
 						snprintf(buffer, sizeof(buffer), "%d", health);
 
 						ImGui::GetBackgroundDrawList()->AddText(
-							ImVec2(cam_pos[i].x - 7.0f, cam_pos[i].y - 15.0f),
+							ImVec2(cam_pos.x - 7.0f, cam_pos.y - 15.0f),
 							IM_COL32(255, 255, 255, 255),
 							buffer
 						);
 						ImGui::GetBackgroundDrawList()->AddText(
-							ImVec2(cam[i].x - 7.0f, cam[i].y + 2.0f),
+							ImVec2(cam.x - 7.0f, cam.y + 2.0f),
 							IM_COL32(255, 255, 0, 255),
 							cache[i].name.c_str()
 						);
@@ -154,13 +154,13 @@ void RenderOverlayThread()
 						snprintf(buffer, sizeof(buffer), "%d", health);
 
 						ImGui::GetBackgroundDrawList()->AddText(
-							ImVec2(cam_pos[i].x - 7.0f, cam_pos[i].y - 15.0f),
+							ImVec2(cam_pos.x - 7.0f, cam_pos.y - 15.0f),
 							IM_COL32(255, 255, 255, 255),
 							buffer
 						);
 
 						ImGui::GetBackgroundDrawList()->AddText(
-							ImVec2(cam[i].x - 7.0f, cam[i].y + 2.0f),
+							ImVec2(cam.x - 7.0f, cam.y + 2.0f),
 							IM_COL32(255, 0, 255, 255),
 							cache[i].name.c_str()
 						);
