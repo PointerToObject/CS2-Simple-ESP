@@ -41,7 +41,7 @@ struct Cache
 struct BaseEntity
 {
 	PADDING(844);
-	uint32_t health; // 0x34C
+	uint32_t m_iHealth; // 0x34C
 
 	PADDING(155);
 	__int8 m_iTeamNum; // 0x3EB
@@ -50,7 +50,7 @@ struct BaseEntity
 struct BasePawn
 {
 	PADDING(5560);
-	Vector3 Position; // 0x15B8
+	Vector3 m_vOldOrigin; // 0x15B8
 }; 
 
 #pragma pack(pop)
