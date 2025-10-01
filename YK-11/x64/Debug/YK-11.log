@@ -1,0 +1,3 @@
+﻿  Reader.cpp
+C:\Users\aiden\OneDrive\Desktop\CS2_External\YK-11\YK-11\Cheat\Threads\Source\Reader.cpp(92,186): warning C4244: 'argument': conversion from 'float' to 'ImDrawFlags', possible loss of data
+  YK-11.vcxproj -> C:\Users\aiden\OneDrive\Desktop\CS2_External\YK-11\x64\Debug\YK-11.exe
